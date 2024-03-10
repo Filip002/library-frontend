@@ -13,13 +13,40 @@
                         name="email"/>
                 </div>
                 <div class="form-group">
-                    <label htmlFor="email">Password: </label>
+                    <label htmlFor="password">Password: </label>
                     <input
                         v-model="user.password"
                         type="password"
                         class="form-control"
                         id="password"
                         name="password"/>
+                </div>
+                <div class="form-group">
+                    <label htmlFor="confirmPassword">Confirm password: </label>
+                    <input
+                        v-model="user.confirmPassword"
+                        type="password"
+                        class="form-control"
+                        id="confirmPassword"
+                        name="confirmPassword"/>
+                </div>
+                <div class="form-group">
+                    <label htmlFor="name">Name: </label>
+                    <input
+                        v-model="user.name"
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"/>
+                </div>
+                <div class="form-group">
+                    <label htmlFor="dateOfBirth">Date of Birth: </label>
+                    <input
+                        v-model="user.dateOfBirth"
+                        type="date"
+                        class="form-control"
+                        id="dateOfBirth"
+                        name="dateOfBirth"/>
                 </div>
                 <button
                     @click="handleRegister()"
@@ -47,10 +74,18 @@ export default {
         return {
             user: {
                 email: '',
-                password: ''
+                password: '',
+                confirmPassword: '',
+                name: '',
+                dateOfBirth: ''
             },
             processing: false,
         };
+    },
+    created() {
+        if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null) {
+            this.$router.push('/')
+        }
     },
     methods: {
         handleRegister() {

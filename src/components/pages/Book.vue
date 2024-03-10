@@ -12,9 +12,10 @@
                 <p><small>ID: {{ book.id }}</small></p>
             </div>
             <div class="col row justify-content-end">
-                <button class="btn btn-primary m-3 col-8">Check out</button>
-                <button class="btn btn-warning m-3 col-8">Edit</button>
-                <button class="btn btn-danger m-3 col-8">Delete</button>
+                <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="btn btn-primary myButton2 m-3 col-8">Sign in to check out</router-link>
+                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-primary myButton m-3 col-8">Check out</button>
+                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-warning myButton m-3 col-8">Edit</button>
+                <button  v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
             <router-link :to="`/`" class="btn btn-secondary">Back to list</router-link>
         </div>
@@ -56,6 +57,15 @@ export default {
                 .catch(error => {
                     return error
                 });
+        },
+        isUserSignedIn() {
+            if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null){
+                return true;
+            }
+            return false;
+        },
+        comingSoon() {
+            alert("coming soon")
         }
     }
 }

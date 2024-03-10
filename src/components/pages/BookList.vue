@@ -2,7 +2,7 @@
     <div class="container">
         <NavBar/>
         <h2 class="text-center mt-5 mb-3">List of Books</h2>
-        <button class="btn btn-success mx-3">Add Book</button>
+        <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-success mx-3">Add Book</button>
         <div class="border border-secondary rounded row p-2 m-3" v-for="book in books" :key="book.id">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
@@ -14,9 +14,9 @@
                 <p><small>ID: {{ book.id }}</small></p>
             </div>
             <div class="col row justify-content-end">
-                <router-link :to="`/${book.id}`" class="btn btn-primary m-3 col-8">Show details</router-link>
-                <button class="btn btn-warning m-3 col-8">Edit</button>
-                <button class="btn btn-danger m-3 col-8">Delete</button>
+                <router-link :to="`/${book.id}`" class="btn btn-primary myButton m-3 col-8">Show details</router-link>
+                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-warning myButton m-3 col-8">Edit</button>
+                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
         </div>
     </div>
@@ -38,6 +38,7 @@ export default {
     },
     created() {
         this.fetchBookList();
+        
     },
     methods: {
         fetchBookList() {
@@ -48,7 +49,16 @@ export default {
                 })
                 .catch(error => {
                     return error
-                });
+                })
+        },
+        isUserSignedIn() {
+            if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null){
+                return true;
+            }
+            return false;
+        },
+        comingSoon() {
+            alert("coming soon")
         }
     }
 }

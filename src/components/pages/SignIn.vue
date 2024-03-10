@@ -52,14 +52,19 @@ export default {
             processing: false,
         };
     },
+    created() {
+        if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null) {
+            this.$router.push('/')
+        }
+    },
     methods: {
         handleSignIn() {
             this.processing = true
             axios.post('/api/account/login', this.user)
                 .then(response => {
+                    localStorage.setItem('token', response.data.token)
+                    this.$router.push('/')
                     this.processing = false
-                    this.user.email = ""
-                    this.user.password = ""
                     return response
                 })
                 .catch(error => {
