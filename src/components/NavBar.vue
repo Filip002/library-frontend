@@ -1,15 +1,30 @@
 <template>
     <nav class="navbar navbar-dark bg-dark">
-        <router-link :to="`/`" class="navbar-brand m-2 p-2 bg-secondary rounded">Books</router-link>
-        <router-link :to="`/sign-in`" class="navbar-brand m-2 p-2 bg-secondary rounded">Sign in</router-link>
-        <router-link :to="`/register`" class="navbar-brand m-2 p-2 bg-secondary rounded">register</router-link>
+        <router-link :to="`/`"  class="navbar-brand m-2 p-2 bg-secondary rounded">Books</router-link>
+        <span class="navbar-brand">{{ userName }}</span>
+        <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="navbar-brand m-2 p-2 bg-secondary rounded">Sign in</router-link>
+        <router-link :to="`/sign-in`" v-if="isUserSignedIn()" @click="handleLogout()" class="navbar-brand m-2 p-2 bg-secondary rounded">Logout</router-link>
+        <router-link :to="`/register`" v-if="!isUserSignedIn()" class="navbar-brand m-2 p-2 bg-secondary rounded">register</router-link>
     </nav>
 </template>
 
 <script>
 
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    methods: {
+        isUserSignedIn() {
+            if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null){
+                return true;
+            }
+            return false;
+        },
+        handleLogout() {
+            if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null){
+                localStorage.removeItem('token')
+            }
+        },
+    }
 }
 
 </script>
