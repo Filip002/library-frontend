@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <NavBar/>
-        <div class="border border-secondary rounded row p-2 m-3">
+        <div class="shadow rounded row p-2 m-3">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
                 <h5>{{ book.title }}</h5>

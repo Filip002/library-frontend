@@ -2,8 +2,8 @@
     <div class="container">
         <NavBar/>
         <h2 class="text-center mt-5 mb-3">List of Books</h2>
-        <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-success mx-3">Add Book</button>
-        <div class="border border-secondary rounded row p-2 m-3" v-for="book in books" :key="book.id">
+        <router-link :to="`/create-book`" v-if="isUserSignedIn()" class="btn btn-success mx-3">Add Book</router-link>
+        <div class="shadow rounded row p-2 m-3" v-for="book in books" :key="book.id">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
                 <h5>{{ book.title }}</h5>

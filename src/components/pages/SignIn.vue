@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <NavBar/>
-        <div class="border border-secondary rounded row p-2 m-3">
+        <div class="shadow rounded row p-2 m-3">
             <form>
                 <div class="form-group">
                     <label htmlFor="email">Email: </label>
@@ -25,7 +25,7 @@
                     @click="handleSignIn()"
                     :disabled="processing"
                     type="button"
-                    class="btn btn-primary mt-2">
+                    class="btn btn-primary mt-3">
                     Sign in
                 </button>
             </form>

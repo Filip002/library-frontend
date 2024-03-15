@@ -7,6 +7,7 @@ import BookList from './components/pages/BookList';
 import Book from './components/pages/Book';
 import SignIn from './components/pages/SignIn';
 import Register from './components/pages/Register';
+import CreateBook from './components/pages/CreateBook';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL
 axios.interceptors.request.use(function (config) {
   config.headers['X-Binarybox-Api-Key'] = process.env.VUE_APP_API_KEY;
@@ -20,6 +21,7 @@ const router = createRouter({
       { path: '/:id', component: Book },
       { path: '/sign-in', component: SignIn },
       { path: '/register', component: Register },
+      { path: '/create-book', component: CreateBook },
     ],
   });
     

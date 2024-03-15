@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-dark bg-dark">
-        <router-link :to="`/`"  class="navbar-brand m-2 p-2 bg-secondary rounded">Books</router-link>
+        <router-link :to="`/`" class="navbar-brand m-2 p-2 bg-secondary rounded">Books</router-link>
         <span class="navbar-brand">{{ userName }}</span>
         <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="navbar-brand m-2 p-2 bg-secondary rounded">Sign in</router-link>
         <router-link :to="`/sign-in`" v-if="isUserSignedIn()" @click="handleLogout()" class="navbar-brand m-2 p-2 bg-secondary rounded">Logout</router-link>
