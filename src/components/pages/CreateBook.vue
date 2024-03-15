@@ -87,14 +87,14 @@ export default {
     data() {
         return {
             book: {
-                title: 'testtt',
-                description: 'testtt',
-                pageCount: 100,
+                title: '',
+                description: '',
+                pageCount: 0,
                 isAvailable: false,
-                authorName: 'ktos tam',
+                authorName: '',
                 categories: [
                     {
-                        name: 'assdfsdaf'
+                        name: ''
                     },
                 ],
             },

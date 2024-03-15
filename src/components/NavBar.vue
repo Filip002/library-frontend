@@ -20,7 +20,7 @@ export default {
             return false;
         },
         handleLogout() {
-            if(localStorage.getItem('token') != "" && localStorage.getItem('token') != null){
+            if(this.isUserSignedIn){
                 localStorage.removeItem('token')
             }
         },

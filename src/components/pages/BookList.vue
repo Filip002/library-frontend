@@ -16,7 +16,7 @@
             <div class="col row justify-content-end">
                 <router-link :to="`/${book.id}`" class="btn btn-primary myButton m-3 col-8">Show details</router-link>
                 <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-warning myButton m-3 col-8">Edit</button>
-                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-danger myButton m-3 col-8">Delete</button>
+                <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
         </div>
     </div>
@@ -56,6 +56,20 @@ export default {
                 return true;
             }
             return false;
+        },
+        handleDelete(id){
+            if(this.isUserSignedIn){
+                axios.delete(`/api/book/${id}`)
+                .then(response => {
+                    this.fetchBookList()
+                    return response
+                })
+                .catch(error => {
+
+                    return error
+                });
+
+            }
         },
         comingSoon() {
             alert("coming soon")
