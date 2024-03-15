@@ -14,8 +14,8 @@
             <div class="col row justify-content-end">
                 <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="btn btn-primary myButton2 m-3 col-8">Sign in to check out</router-link>
                 <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-primary myButton m-3 col-8">Check out</button>
-                <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-warning myButton m-3 col-8">Edit</button>
-                <button  v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-danger myButton m-3 col-8">Delete</button>
+                <router-link :to="`/update-book/${book.id}`" v-if="isUserSignedIn()" class="btn btn-warning myButton m-3 col-8">Edit</router-link>
+                <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
             <router-link :to="`/`" class="btn btn-secondary">Back to list</router-link>
         </div>
@@ -63,6 +63,20 @@ export default {
                 return true;
             }
             return false;
+        },
+        handleDelete(id){
+            if(this.isUserSignedIn){
+                axios.delete(`/api/book/${id}`)
+                .then(response => {
+                    this.$router.push('/')
+                    return response
+                })
+                .catch(error => {
+
+                    return error
+                });
+
+            }
         },
         comingSoon() {
             alert("coming soon")

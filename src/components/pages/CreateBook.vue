@@ -69,6 +69,7 @@
                     class="btn btn-primary mt-3">
                     Add new Book
                 </button>
+                <router-link :to="`/`" class="btn btn-secondary mt-3 ms-3">Back to list</router-link>
             </form>
         </div>
     </div>
@@ -89,7 +90,7 @@ export default {
             book: {
                 title: '',
                 description: '',
-                pageCount: 0,
+                pageCount: 1,
                 isAvailable: false,
                 authorName: '',
                 categories: [
@@ -107,7 +108,11 @@ export default {
             axios.post('api/book', this.book)
                 .then(response => {
                     this.processing = false
-                    this.$router.push('/')
+                    this.book.title = ''
+                    this.book.description = ''
+                    this.book.pageCount = 1
+                    this.book.isAvailable = false
+                    this.book.authorName = ''
                     return response
                 })
                 .catch(error => {
