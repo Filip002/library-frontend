@@ -8,6 +8,10 @@
                 <p>Author: {{ book.authorName }}</p>
                 <p>PageCount: {{ book.pageCount }}</p>
                 <p>Available: {{ book.isAvailable }}</p>
+                <p>Categories: </p>
+                <ul v-for="category in book.categories" :key="category.name">
+                    <li>{{ category.name }}</li>
+                </ul>
                 <p>Description: {{ book.description }}</p>
                 <p><small>ID: {{ book.id }}</small></p>
             </div>
@@ -34,14 +38,7 @@ export default {
     },
     data() {
         return {
-            book: {
-                id: '',
-                title: '',
-                description: '',
-                authorName: '',
-                pageCount: '',
-                isAvailable: ''
-            }
+            book: {}
         };
     },
     created() {

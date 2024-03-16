@@ -10,7 +10,6 @@
                 <p>Author: {{ book.authorName }}</p>
                 <p>PageCount: {{ book.pageCount }}</p>
                 <p>Available: {{ book.isAvailable }}</p>
-                <p>Description: {{ book.description }}</p>
                 <p><small>ID: {{ book.id }}</small></p>
             </div>
             <div class="col row justify-content-end">
