@@ -24,6 +24,7 @@
 
 <script>
 import axios from "axios";
+import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
 
 export default {
@@ -59,16 +60,38 @@ export default {
         },
         handleDelete(id){
             if(this.isUserSignedIn){
-                axios.delete(`/api/book/${id}`)
-                .then(response => {
-                    this.fetchBookList()
-                    return response
+                Swal.fire({
+                    title: 'Warning',
+                    text: 'Do you want to delete that book?',
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#bbb',
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        axios.delete(`/api/book/${id}`)
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Book deleted successfully',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            this.fetchBookList()
+                            return response
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            return error
+                        });
+                    }
                 })
-                .catch(error => {
-
-                    return error
-                });
-
             }
         },
         comingSoon() {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-
+import Swal from 'sweetalert2'
 export default {
     name: 'NavBar',
     methods: {
@@ -22,6 +22,12 @@ export default {
         handleLogout() {
             if(this.isUserSignedIn){
                 localStorage.removeItem('token')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully logout',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             }
         },
     }

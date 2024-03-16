@@ -78,6 +78,7 @@
 <script>
 
 import axios from "axios";
+import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
 
 export default {
@@ -113,10 +114,22 @@ export default {
                     this.book.pageCount = 1
                     this.book.isAvailable = false
                     this.book.authorName = ''
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Book created successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     return response
                 })
                 .catch(error => {
                     this.processing = false
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     return error
                 });
         }

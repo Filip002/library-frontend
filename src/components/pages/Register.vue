@@ -63,6 +63,7 @@
 <script>
 
 import axios from "axios";
+import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
 
 export default {
@@ -95,10 +96,25 @@ export default {
                     this.processing = false
                     this.user.email = ""
                     this.user.password = ""
+                    this.confirmPassword = ""
+                    this.name = ""
+                    this.dateOfBirth = ""
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully created account',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     return response
                 })
                 .catch(error => {
                     this.processing = false
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     return error
                 })
         },

@@ -47,6 +47,7 @@
 <script>
 
 import axios from "axios";
+import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
 
 export default {
@@ -88,11 +89,23 @@ export default {
             axios.put(`api/book/${id}`, this.updatedBook)
                 .then(response => {
                     this.processing = false
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Book updated successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     this.$router.push(`/${id}`)
                     return response
                 })
                 .catch(error => {
                     this.processing = false
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     return error
                 });
         }
