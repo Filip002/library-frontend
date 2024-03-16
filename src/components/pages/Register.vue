@@ -2,6 +2,7 @@
     <div class="container">
         <NavBar/>
         <div class="shadow rounded row p-2 m-3">
+            <h2 class="text-center">Register</h2>
             <form>
                 <div class="form-group">
                     <label htmlFor="email">Email: </label>
@@ -105,6 +106,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1700
                     })
+                    this.$router.push("/sign-in")
                     return response
                 })
                 .catch(error => {

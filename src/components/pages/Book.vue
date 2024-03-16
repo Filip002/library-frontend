@@ -4,11 +4,11 @@
         <div class="shadow rounded row p-2 m-3">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
-                <h5 class="fw-bold border-bottom">{{ book.title }}</h5>
-                <p><b>Author:</b> {{ book.authorName }}</p>
-                <p><b>PageCount:</b> {{ book.pageCount }}</p>
-                <p><b>Available:</b> {{ book.isAvailable }}</p>
-                <p><small><b>ID:</b> {{ book.id }}</small></p>
+                <h5 class="fw-bold border-bottom"><span class="fw-normal">Title: </span>{{ book.title }}</h5>
+                <p class="border-bottom">Author: <b>{{ book.authorName }}</b></p>
+                <p class="border-bottom">PageCount: <b>{{ book.pageCount }}</b></p>
+                <p class="border-bottom">Available: <b v-if="book.isAvailable">Available</b><b v-if="!book.isAvailable">Unavailable</b></p>
+                <p class="border-bottom"><small>ID: <b>{{ book.id }}</b></small></p>
             </div>
             <div class="col row justify-content-end">
                 <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="btn btn-primary myButton2 m-3 col-8">Sign in to check out</router-link>
@@ -17,10 +17,11 @@
                 <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
             <div class="ms-2">
-                <p><b>Description:</b> {{ book.description }}</p>
-                <p><b>Categories:</b> </p>
+                <p class="border-bottom">Description: </p>
+                <p class="mt-1 pb-2 border-bottom">{{ book.description }}</p>
+                <p class="border-bottom">Categories: </p>
                     <ul v-for="category in book.categories" :key="category.name">
-                        <li>{{ category.name }}</li>
+                        <li><b>{{ category.name }}</b></li>
                     </ul>
             </div>
             <router-link :to="`/`" class="btn btn-secondary">Back to list</router-link>

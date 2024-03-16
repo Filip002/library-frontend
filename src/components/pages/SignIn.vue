@@ -2,6 +2,7 @@
     <div class="container">
         <NavBar/>
         <div class="shadow rounded row p-2 m-3">
+            <h2 class="text-center">Sign in</h2>
             <form>
                 <div class="form-group">
                     <label htmlFor="email">Email: </label>

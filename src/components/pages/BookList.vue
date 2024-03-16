@@ -6,11 +6,11 @@
         <div class="shadow rounded row p-2 m-3" v-for="book in books" :key="book.id">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
-                <h5>{{ book.title }}</h5>
-                <p>Author: {{ book.authorName }}</p>
-                <p>PageCount: {{ book.pageCount }}</p>
-                <p>Available: {{ book.isAvailable }}</p>
-                <p><small>ID: {{ book.id }}</small></p>
+                <h5 class="fw-bold border-bottom"><span class="fw-normal">Title: </span>{{ book.title }}</h5>
+                <p class="border-bottom">Author: <b>{{ book.authorName }}</b></p>
+                <p class="border-bottom">PageCount: <b>{{ book.pageCount }}</b></p>
+                <p class="border-bottom">Available: <b v-if="book.isAvailable">Available</b><b v-if="!book.isAvailable">Unavailable</b></p>
+                <p class="border-bottom"><small>ID: <b>{{ book.id }}</b></small></p>
             </div>
             <div class="col row justify-content-end">
                 <router-link :to="`/${book.id}`" class="btn btn-primary myButton m-3 col-8">Show details</router-link>
