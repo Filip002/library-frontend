@@ -103,7 +103,7 @@ export default {
                         icon: 'success',
                         title: 'Successfully created account',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     return response
                 })
@@ -113,7 +113,7 @@ export default {
                         icon: 'error',
                         title: 'Error',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     return error
                 })

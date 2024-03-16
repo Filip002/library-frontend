@@ -54,9 +54,9 @@
                         name="authorName"/>
                 </div>
                 <div class="form-group">
-                    <label htmlFor="categories">Categories: </label>
+                    <label htmlFor="categories">Category: </label>
                     <input
-                        v-model="book.categories"
+                        v-model="book.categories[0].name"
                         type="text"
                         class="form-control"
                         id="categories"
@@ -114,11 +114,12 @@ export default {
                     this.book.pageCount = 1
                     this.book.isAvailable = false
                     this.book.authorName = ''
+                    this.book.categories[0].name = ''
                     Swal.fire({
                         icon: 'success',
                         title: 'Book created successfully',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     return response
                 })
@@ -127,8 +128,9 @@ export default {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
+                        text: error,
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     return error
                 });

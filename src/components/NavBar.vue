@@ -26,7 +26,7 @@ export default {
                     icon: 'success',
                     title: 'Successfully logout',
                     showConfirmButton: false,
-                    timer: 2000
+                    timer: 1700
                 })
             }
         },

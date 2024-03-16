@@ -93,7 +93,7 @@ export default {
                         icon: 'success',
                         title: 'Book updated successfully',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     this.$router.push(`/${id}`)
                     return response
@@ -104,7 +104,7 @@ export default {
                         icon: 'error',
                         title: 'Error',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 1700
                     })
                     return error
                 });

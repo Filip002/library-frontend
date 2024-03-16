@@ -75,7 +75,7 @@ export default {
                                 icon: 'success',
                                 title: 'Book deleted successfully',
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 1700
                             })
                             this.fetchBookList()
                             return response
@@ -85,7 +85,7 @@ export default {
                                 icon: 'error',
                                 title: 'Error',
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 1700
                             })
                             return error
                         });

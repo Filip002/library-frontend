@@ -4,22 +4,24 @@
         <div class="shadow rounded row p-2 m-3">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
             <div class="col-4">
-                <h5>{{ book.title }}</h5>
-                <p>Author: {{ book.authorName }}</p>
-                <p>PageCount: {{ book.pageCount }}</p>
-                <p>Available: {{ book.isAvailable }}</p>
-                <p>Categories: </p>
-                <ul v-for="category in book.categories" :key="category.name">
-                    <li>{{ category.name }}</li>
-                </ul>
-                <p>Description: {{ book.description }}</p>
-                <p><small>ID: {{ book.id }}</small></p>
+                <h5 class="fw-bold border-bottom">{{ book.title }}</h5>
+                <p><b>Author:</b> {{ book.authorName }}</p>
+                <p><b>PageCount:</b> {{ book.pageCount }}</p>
+                <p><b>Available:</b> {{ book.isAvailable }}</p>
+                <p><small><b>ID:</b> {{ book.id }}</small></p>
             </div>
             <div class="col row justify-content-end">
                 <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="btn btn-primary myButton2 m-3 col-8">Sign in to check out</router-link>
                 <button v-if="isUserSignedIn()" @click="comingSoon()" class="btn btn-primary myButton m-3 col-8">Check out</button>
                 <router-link :to="`/update-book/${book.id}`" v-if="isUserSignedIn()" class="btn btn-warning myButton m-3 col-8">Edit</router-link>
                 <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
+            </div>
+            <div class="ms-2">
+                <p><b>Description:</b> {{ book.description }}</p>
+                <p><b>Categories:</b> </p>
+                    <ul v-for="category in book.categories" :key="category.name">
+                        <li>{{ category.name }}</li>
+                    </ul>
             </div>
             <router-link :to="`/`" class="btn btn-secondary">Back to list</router-link>
         </div>
@@ -80,7 +82,7 @@ export default {
                                 icon: 'success',
                                 title: 'Book deleted successfully',
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 1700
                             })
                             this.$router.push('/')
                             return response
@@ -90,7 +92,7 @@ export default {
                                 icon: 'error',
                                 title: 'Error',
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 1700
                             })
                             return error
                         });
