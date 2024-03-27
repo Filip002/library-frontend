@@ -26,6 +26,7 @@
             </div>
             <router-link :to="`/`" class="btn btn-secondary">Back to list</router-link>
         </div>
+        <FooterC/>
     </div>
 </template>
 
@@ -33,11 +34,13 @@
 import axios from "axios";
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
+import FooterC from '../Footer.vue';
 
 export default {
     name: 'BookComponent',
     components: {
         NavBar,
+        FooterC,
     },
     data() {
         return {

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark rounded">
         <router-link :to="`/`" class="navbar-brand m-2 p-2 bg-secondary rounded">Books</router-link>
         <span class="navbar-brand">Library website</span>
         <router-link :to="`/sign-in`" v-if="!isUserSignedIn()" class="navbar-brand m-2 p-2 bg-secondary rounded">Sign in</router-link>

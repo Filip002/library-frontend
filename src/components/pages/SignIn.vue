@@ -31,6 +31,7 @@
                 </button>
             </form>
         </div>
+        <FooterC/>
     </div>
 </template>
 
@@ -39,11 +40,13 @@
 import axios from "axios";
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
+import FooterC from '../Footer.vue';
 
 export default {
     name: 'SignIn',
     components: {
         NavBar,
+        FooterC,
     },
     data() {
         return {

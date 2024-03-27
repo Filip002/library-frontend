@@ -72,6 +72,7 @@
                 <router-link :to="`/`" class="btn btn-secondary mt-3 ms-3">Back to list</router-link>
             </form>
         </div>
+        <FooterC/>
     </div>
 </template>
 
@@ -80,11 +81,13 @@
 import axios from "axios";
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
+import FooterC from '../Footer.vue';
 
 export default {
     name: 'CreateBook',
     components: {
         NavBar,
+        FooterC,
     },
     data() {
         return {

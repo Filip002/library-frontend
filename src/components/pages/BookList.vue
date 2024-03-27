@@ -18,6 +18,7 @@
                 <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
         </div>
+        <FooterC/>
     </div>
 </template>
 
@@ -25,11 +26,13 @@
 import axios from "axios";
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar.vue';
+import FooterC from '../Footer.vue';
 
 export default {
     name: 'BookList',
     components: {
         NavBar,
+        FooterC,
     },
     data() {
         return {
