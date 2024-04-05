@@ -1,7 +1,15 @@
 <template>
     <div class="container">
         <NavBar/>
-        <h2 class="text-center mt-5 mb-3">List of Books</h2>
+        <div class="row justify-content-center bg-dark py-3 mx-4">
+            <div class="col-10">
+                <input type="text" v-model="searchPhrase" class="form-control" placeholder="search for books" v-on:keyup.enter="handleSearch()"/>
+            </div>
+            <div class="col-auto">
+                <button @click="handleSearch()" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <h2 class="text-center my-3">{{ text }}</h2>
         <router-link :to="`/create-book`" v-if="isUserSignedIn()" class="btn btn-success mx-3">Add Book</router-link>
         <div class="shadow rounded row p-2 m-3" v-for="book in books" :key="book.id">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
@@ -36,12 +44,13 @@ export default {
     },
     data() {
         return {
-            books:[]
+            books:[],
+            searchPhrase: "",
+            text: "List of Books"
         };
     },
     created() {
         this.fetchBookList();
-        
     },
     methods: {
         fetchBookList() {
@@ -59,6 +68,18 @@ export default {
                 return true;
             }
             return false;
+        },
+        handleSearch(){
+            if(this.searchPhrase != "")
+                this.text = 'Results for "' + this.searchPhrase.toString() + '"'
+            axios.get(`/api/book?searchPhrase=${this.searchPhrase}`)
+                .then(response => {
+                    this.books = response.data;
+                    return response
+                })
+                .catch(error => {
+                    return error
+                })
         },
         handleDelete(id){
             if(this.isUserSignedIn){
