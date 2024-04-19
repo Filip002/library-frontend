@@ -9,7 +9,7 @@
                 <button @click="handleSearch()" class="btn btn-primary">Search</button>
             </div>
         </div>
-        <h2 class="text-center my-3">{{ text }}</h2>
+        <h2 id="H2" class="text-center my-3">{{ text }}</h2>
         <router-link :to="`/create-book`" v-if="isUserSignedIn()" class="btn btn-success mx-3">Add Book</router-link>
         <div class="shadow rounded row p-2 m-3" v-for="book in books" :key="book.id">
             <span class="align-top col m-2"><img src="book.png" alt="book image"></span>
@@ -26,6 +26,25 @@
                 <button v-if="isUserSignedIn()" @click="handleDelete(book.id)" class="btn btn-danger myButton m-3 col-8">Delete</button>
             </div>
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a @click="handlePageNavigation(pageNumber-1)" href="#H2" class="page-link" v-if="pageNumber-1>=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" v-if="pageNumber-1>1"><a @click="handlePageNavigation(1)" href="#H2" class="page-link">{{ 1 }}</a></li>
+                <li class="page-item" v-if="pageNumber!=1"><a @click="handlePageNavigation(pageNumber-1)" href="#H2" class="page-link">{{ pageNumber-1 }}</a></li>
+                <li class="page-item"><a href="#H2" class="page-link bg-primary text-white">{{ pageNumber }}</a></li>
+                <li class="page-item" v-if="pageNumber+1<=totalPages"><a @click="handlePageNavigation(pageNumber+1)" href="#H2" class="page-link">{{ pageNumber + 1 }}</a></li>
+                <li class="page-item" v-if="totalPages!=1 && totalPages!=pageNumber+1 && totalPages!=pageNumber"><a @click="handlePageNavigation(totalPages)" href="#H2" class="page-link">{{ totalPages }}</a></li>
+                <li class="page-item" v-if="pageNumber+1<=totalPages">
+                    <a @click="handlePageNavigation(pageNumber+1)" href="#H2" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+        </nav>
         <FooterC/>
     </div>
 </template>
@@ -46,7 +65,13 @@ export default {
         return {
             books:[],
             searchPhrase: "",
-            text: "List of Books"
+            text: "List of Books",
+            pageNumber: 1,
+            pageSize: 5,
+            totalPages: 1,
+            totalItemsCount: 1,
+            itemFrom: 1,
+            itemsTo: 1
         };
     },
     created() {
@@ -54,9 +79,13 @@ export default {
     },
     methods: {
         fetchBookList() {
-            axios.get('/api/book')
+            axios.get(`/api/book?pageNumber=${this.pageNumber}&pageSize=${this.pageSize}`)
                 .then(response => {
-                    this.books = response.data;
+                    this.books = response.data.items;
+                    this.totalPages = response.data.totalPages;
+                    this.totalItemsCount = response.data.totalItemsCount;
+                    this.itemFrom = response.data.itemFrom;
+                    this.itemsTo = response.data.itemsTo;
                     return response
                 })
                 .catch(error => {
@@ -69,12 +98,24 @@ export default {
             }
             return false;
         },
+        handlePageNavigation(nextPageNumber){
+            this.pageNumber=nextPageNumber;
+            this.fetchBookListPage(nextPageNumber);
+        },
         handleSearch(){
+            this.fetchBookListPage(1)
+        },
+        fetchBookListPage(page){
             if(this.searchPhrase != "")
                 this.text = 'Results for "' + this.searchPhrase.toString() + '"'
-            axios.get(`/api/book?searchPhrase=${this.searchPhrase}`)
+            axios.get(`/api/book?searchPhrase=${this.searchPhrase}&pageNumber=${page}&pageSize=${this.pageSize}`)
                 .then(response => {
-                    this.books = response.data;
+                    this.books = response.data.items;
+                    this.totalPages = response.data.totalPages;
+                    this.totalItemsCount = response.data.totalItemsCount;
+                    this.itemFrom = response.data.itemFrom;
+                    this.itemsTo = response.data.itemsTo;
+                    this.pageNumber=page;
                     return response
                 })
                 .catch(error => {
